@@ -18,7 +18,7 @@
 					$dept = $this->User_model->get_dept($country,$town,$province);
 				}
 			}
-			echo $dept;
+			echo json_encode($dept);
 		}
 
 		//用户注册功能

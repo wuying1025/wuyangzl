@@ -30,7 +30,7 @@
             );
 
             $this->load->model('Privatemsg_model');
-            $result=$trhis->Privatemsg_model->private_model_insert($private_all);
+            $result=$this->Privatemsg_model->private_model_insert($private_all);
             echo $result;
         }
 
@@ -42,7 +42,7 @@
             //操作散户信息表(查询)
             $dept_id=$this->input->post('private_dept_id');
             $this->load->model('Privatemsg_model');
-            $reuslt=$this->Privatemsg_model->private_model_sel($dept_id);
+            $result=$this->Privatemsg_model->private_model_sel($dept_id);
             echo json_encode($result);
         }
     }
