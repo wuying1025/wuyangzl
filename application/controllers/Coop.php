@@ -6,6 +6,9 @@
 		}
 
 		public function coop_msg_insert(){
+			header('Access-Control-Allow-Origin:* ');
+			header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
+
 			//操作合作社人员信息表(插入)
 			$grantor = $this->input->post('grantor');
 			$area = $this->input->post('area');
@@ -38,17 +41,26 @@
 		}
 		//查询全部的合作社人员信息
 		public function coop_msg_sel(){
+			header('Access-Control-Allow-Origin:* ');
+			header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
+
 			$dept_id = $this->input->post('dept_id');
 			$msgs = $this->Coop_model->get_coop_msg($dept_id);
 			echo json_encode($msgs);
 		}
 		public function get_coop_all_msg(){
+			header('Access-Control-Allow-Origin:* ');
+			header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
+
 			$dept_id = $this->input->post('dept_id');
 			$cool_all = $this->Coop_model->get_coop_all_msg($dept_id);
 			echo json_encode($cool_all);
 		}
 
 		public function coop_all_msg_insert(){
+			header('Access-Control-Allow-Origin:* ');
+			header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
+
 			//操作合作社五项信息表(插入或者修改)
 			$dept_id = $this->input->post('dept_id');
 			$directors_num = $this->input->post('directors_num');
@@ -87,12 +99,8 @@
 					echo 'fail';
 				}
 			}
-
-
-
-
 		}
-		
+
 	}
 
 ?>
