@@ -8,7 +8,6 @@
             //跨域操作
             header('Access-Control-Allow-Origin:* ');
             header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
-
             //操作散户信息表(插入)
             $dept_id=$this->input->post('private_dept_id');
             $private_owner=$this->input->post('private_owner');
@@ -16,7 +15,21 @@
             $private_ID_num=$this->input->post('private_ID_num');
             $private_tel_num=$this->input->post('private_tel_num');
             $private_address=$this->input->post('private_address');
-            $private_soil_contract=$this->input->post('private_soil_contract');
+            //$private_soil_contract=$this->input->post('private_soil_contract');
+            $private_soil_name=$this->input->post('private_soil_name');
+
+            $sfile=$_FILES['private_soil_contract'];
+            $yuanurl=$sfile[tmp_name];
+            $sname=explode('.',$sfile['name']);
+            $hou=count($sname)-1;
+            $houzhui=$sname[$hou];
+            $filename=$private_owner.'+'.$private_ID_num.'.'.$houzhui;
+            $urlname=base_url()."/uploads/private/".$filename;
+            $cunurl="/uploads/private/".$filename;
+            $a=move_uploaded_file($yuanurl,$urlname);
+            if($a){
+                $private_soil_contract=$cunurl;
+            }
 
             $private_all=array(
                 'w_private_owner'=>$private_owner,
@@ -26,6 +39,7 @@
                 'w_private_address'=>$private_address,
                 'w_private_soil_contract'=>$private_soil_contract,
                 'w_private_dept_id'=>$dept_id,
+                'w_private_soil_name'=>$private_soil_name
 
             );
 

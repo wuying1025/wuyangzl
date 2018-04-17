@@ -19,7 +19,23 @@
 			$soil_tel_num = $this->input->post('soil_tel_num');
 			$soil_address = $this->input->post('soil_address');
 			$soil_contract = $this->input->post('soil_contract');
+			$soil_name = $this->input->post('soil_name');
 			$dept_id = $this->input->post('dept_id');
+
+
+			$sfile=$_FILES['coop_soil_contract'];
+			$yuanurl=$sfile[tmp_name];
+			$sname=explode('.',$sfile['name']);
+			$hou=count($sname)-1;
+			$houzhui=$sname[$hou];
+			$filename=$owner.'+'.$id_num.'.'.$houzhui;
+			$urlname=base_url()."/uploads/coop/".$filename;
+			$cunurl="/uploads/coop/".$filename;
+			$a=move_uploaded_file($yuanurl,$urlname);
+			if($a){
+				$soil_contract=$cunurl;
+			}
+
 			$rows = $this->Coop_model->save_coop_msg(array(
 				'w_coop_grantor'=>$grantor,
 				'w_coop_soil_area'=>$area,
@@ -30,6 +46,7 @@
 				'w_coop_soil_tel_num'=>$soil_tel_num,
 				'w_coop_soil_address'=>$soil_address,
 				'w_coop_soil_contract'=>$soil_contract,
+				'w_coop_soil_name'=>$soil_name,
 				'w_coop_dept_id'=>$dept_id,
 			));
 			if($rows > 0){
