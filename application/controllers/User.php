@@ -11,11 +11,14 @@
 			$country = $this->input->post('country');
 			$town = $this->input->post('town');
 			$province = $this->input->post('province');
-			$dept = $this->User_model->get_dept($country,$town,$province);
+			$village = $this->input->post('village');
+			$city = $this->input->post('city');
+			$dept = $this->User_model->get_dept($country,$town,$province,$village,$city);
 			if($dept == null){
-				$rows = $this->User_model->save_dept($country,$town,$province);
+				$rows = $this->User_model->save_dept($country,$town,$province,$village,$city);
 				if($rows > 0){
-					$dept = $this->User_model->get_dept($country,$town,$province);
+					$dept = $this->User_model->get_dept($country,$town,$province,$village,$city);
+					$dept->isReg = true;
 				}
 			}
 			echo json_encode($dept);

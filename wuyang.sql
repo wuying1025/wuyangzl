@@ -1,22 +1,24 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : sword
-Source Server Version : 50505
-Source Host           : localhost:3306
-Source Database       : wuyang
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 100113
+ Source Host           : localhost
+ Source Database       : wuyang
 
-Target Server Type    : MYSQL
-Target Server Version : 50505
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 100113
+ File Encoding         : utf-8
 
-Date: 2018-04-17 09:29:19
+ Date: 04/17/2018 20:31:08 PM
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for `w_coop_all_msg`
+--  Table structure for `w_coop_all_msg`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_coop_all_msg`;
 CREATE TABLE `w_coop_all_msg` (
@@ -28,14 +30,10 @@ CREATE TABLE `w_coop_all_msg` (
   `w_coop_soil_property` varchar(255) DEFAULT NULL,
   `w_coop_all_dept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`w_coop_all_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of w_coop_all_msg
--- ----------------------------
-
--- ----------------------------
--- Table structure for `w_coop_msg`
+--  Table structure for `w_coop_msg`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_coop_msg`;
 CREATE TABLE `w_coop_msg` (
@@ -50,31 +48,26 @@ CREATE TABLE `w_coop_msg` (
   `w_coop_soil_address` varchar(255) DEFAULT NULL COMMENT ' 土地所有者地址',
   `w_coop_soil_contract` varchar(255) DEFAULT NULL COMMENT '土地确权证等打包信息路径',
   `w_coop_dept_id` int(11) DEFAULT NULL,
+  `w_coop_soil_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`w_coop_msg_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of w_coop_msg
--- ----------------------------
-
--- ----------------------------
--- Table structure for `w_dept`
+--  Table structure for `w_dept`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_dept`;
 CREATE TABLE `w_dept` (
   `w_dept_id` int(11) NOT NULL AUTO_INCREMENT,
-  `w_country_dept_name` varchar(255) DEFAULT NULL,
-  `w_town_dept_name` varchar(255) DEFAULT NULL,
-  `w_province_dept_name` varchar(255) DEFAULT NULL,
+  `w_country_dept_name` varchar(255) DEFAULT NULL COMMENT '县',
+  `w_town_dept_name` varchar(255) DEFAULT NULL COMMENT '乡镇',
+  `w_province_dept_name` varchar(255) DEFAULT NULL COMMENT '省',
+  `w_village_dept_name` varchar(255) DEFAULT NULL COMMENT '村',
+  `w_city_dept_name` varchar(255) DEFAULT NULL COMMENT '市',
   PRIMARY KEY (`w_dept_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of w_dept
--- ----------------------------
-
--- ----------------------------
--- Table structure for `w_machine`
+--  Table structure for `w_machine`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_machine`;
 CREATE TABLE `w_machine` (
@@ -87,15 +80,12 @@ CREATE TABLE `w_machine` (
   `w_machine_buy_time` date DEFAULT NULL,
   `w_machine_allowance` int(11) DEFAULT NULL,
   `w_machine_owner` varchar(255) DEFAULT NULL,
+  `w_machine_dept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`w_machine_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of w_machine
--- ----------------------------
-
--- ----------------------------
--- Table structure for `w_private_msg`
+--  Table structure for `w_private_msg`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_private_msg`;
 CREATE TABLE `w_private_msg` (
@@ -105,17 +95,14 @@ CREATE TABLE `w_private_msg` (
   `w_private_ID_num` varchar(255) DEFAULT NULL,
   `w_private_tel_num` varchar(255) DEFAULT NULL,
   `w_private_address` varchar(255) DEFAULT NULL,
-  `w_private_soil_contract` varchar(255) DEFAULT NULL,
+  `w_private_soil_contract` varchar(255) DEFAULT NULL COMMENT '土地合同上传路径',
   `w_private_dept_id` int(11) DEFAULT NULL,
+  `w_private_soil_name` varchar(255) DEFAULT NULL COMMENT '土地合同名称',
   PRIMARY KEY (`w_private_msg_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of w_private_msg
--- ----------------------------
-
--- ----------------------------
--- Table structure for `w_produfactors`
+--  Table structure for `w_produfactors`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_produfactors`;
 CREATE TABLE `w_produfactors` (
@@ -143,14 +130,10 @@ CREATE TABLE `w_produfactors` (
   `w_produfactors_remark` varchar(255) DEFAULT NULL,
   `w_produfactors_dept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`w_produfactors_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of w_produfactors
--- ----------------------------
-
--- ----------------------------
--- Table structure for `w_user`
+--  Table structure for `w_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `w_user`;
 CREATE TABLE `w_user` (
@@ -159,8 +142,6 @@ CREATE TABLE `w_user` (
   `w_pass` varchar(255) DEFAULT NULL,
   `w_dept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`w_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of w_user
--- ----------------------------
+SET FOREIGN_KEY_CHECKS = 1;

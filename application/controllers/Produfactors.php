@@ -59,8 +59,12 @@
 			);
 
 			$this->load->model('Produfactors_model');
-			$result=$this->Produfactors_model->produfactors_model_insert($produfactors_arr);
-			echo $result;
+			$rows=$this->Produfactors_model->produfactors_model_insert($produfactors_arr);
+			if($rows>0){
+				echo 'success';
+			}else{
+				echo 'fail';
+			}
 
 		}
 

@@ -15,7 +15,7 @@ class Coop_model extends CI_Model{
 
     public function get_coop_all_msg($dept_id){
         return $this -> db -> get_where('w_coop_all_msg',array(
-            "w_coop_dept_id"=>$dept_id
+            "w_coop_all_dept_id"=>$dept_id
         )) -> row();
     }
 

@@ -18,24 +18,9 @@
 			$owner = $this->input->post('owner');
 			$soil_tel_num = $this->input->post('soil_tel_num');
 			$soil_address = $this->input->post('soil_address');
-			$soil_contract = $this->input->post('soil_contract');
 			$soil_name = $this->input->post('soil_name');
 			$dept_id = $this->input->post('dept_id');
-
-
-			$sfile=$_FILES['coop_soil_contract'];
-			$yuanurl=$sfile[tmp_name];
-			$sname=explode('.',$sfile['name']);
-			$hou=count($sname)-1;
-			$houzhui=$sname[$hou];
-			$filename=$owner.'+'.$id_num.'.'.$houzhui;
-			$urlname=base_url()."/uploads/coop/".$filename;
-			$cunurl="/uploads/coop/".$filename;
-			$a=move_uploaded_file($yuanurl,$urlname);
-			if($a){
-				$soil_contract=$cunurl;
-			}
-
+			
 			$rows = $this->Coop_model->save_coop_msg(array(
 				'w_coop_grantor'=>$grantor,
 				'w_coop_soil_area'=>$area,
@@ -45,7 +30,6 @@
 				'w_coop_soil_owner'=>$owner,
 				'w_coop_soil_tel_num'=>$soil_tel_num,
 				'w_coop_soil_address'=>$soil_address,
-				'w_coop_soil_contract'=>$soil_contract,
 				'w_coop_soil_name'=>$soil_name,
 				'w_coop_dept_id'=>$dept_id,
 			));
@@ -88,12 +72,11 @@
 			$cool_all = $this->Coop_model->get_coop_all_msg($dept_id);
 			if($cool_all == null){
 				$rows = $this->Coop_model->save_coop_all_msg(array(
-					'w_coop_grantor'=>$dept_id,
-					'w_coop_soil_area'=>$directors_num,
-					'w_coop_ID_num'=>$keyjob_num,
-					'w_coop_tel_num'=>$pyear_employ_num,
-					'w_coop_address'=>$member_num,
-					'w_coop_soil_owner'=>$soil_property,
+					'w_coop_directors_num'=>$directors_num,
+					'w_coop_keyjob_num'=>$keyjob_num,
+					'w_coop_pyear_employ_num'=>$pyear_employ_num,
+					'w_coop_member_num'=>$member_num,
+					'w_coop_soil_property'=>$soil_property,
 					'w_coop_all_dept_id'=>$dept_id
 				));
 				if($rows > 0){
@@ -103,16 +86,36 @@
 				}
 			}else{
 				$rows = $this->Coop_model->update_coop_all_msg(array(
-					'w_coop_grantor'=>$dept_id,
-					'w_coop_soil_area'=>$directors_num,
-					'w_coop_ID_num'=>$keyjob_num,
-					'w_coop_tel_num'=>$pyear_employ_num,
-					'w_coop_address'=>$member_num,
-					'w_coop_soil_owner'=>$soil_property,
+					'w_coop_directors_num'=>$directors_num,
+					'w_coop_keyjob_num'=>$keyjob_num,
+					'w_coop_pyear_employ_num'=>$pyear_employ_num,
+					'w_coop_member_num'=>$member_num,
+					'w_coop_soil_property'=>$soil_property,
 				),$dept_id);
 				if($rows > 0){
 					echo 'success';
 				}else{
+					echo 'fail';
+				}
+			}
+		}
+
+		public function img_upload()
+		{
+			header('Access-Control-Allow-Origin:* ');
+			header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
+
+			//允许上传文件格式
+			$path = "./uploads/coop/";//
+
+			if (isset($_POST)) {
+
+				$name = $_FILES['file']['name'];
+				$name_tmp = $_FILES['file']['tmp_name'];
+				$pic_url =  $path . $name;
+				if (move_uploaded_file($name_tmp, $pic_url)) {//临时文件转移到目标文件夹
+					echo 'success';
+				} else {
 					echo 'fail';
 				}
 			}

@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
     class Machine_model extends CI_Model{
         public function machine_model_insert($machine_arr){
-            $query=$this->db->insert('w_machine',$machine_arr);
-            return $query;
+            $this->db->insert('w_machine',$machine_arr);
+            return $this -> db -> affected_rows();
         }
 
         public function machine_model_sel($dept_id){

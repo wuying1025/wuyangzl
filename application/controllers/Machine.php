@@ -32,9 +32,12 @@
 				'w_machine_owner'=>$machine_owner,
 			);
 			$this->load->model('Machine_model');
-			$result=$this->Machine_model->machine_model_insert($machine_arr);
-			echo $result;
-
+			$rows=$this->Machine_model->machine_model_insert($machine_arr);
+			if($rows > 0){
+				echo 'success';
+			}else{
+				echo 'fail';
+			}
 		}
 
 		public function machine_msg_sel(){

@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
     class Produfactors_model extends CI_Model{
         public function produfactors_model_insert($produfactors_arr){
-            $query=$this->db->insert('w_produfactors',$produfactors_arr);
-            return $query;
+            $this->db->insert('w_produfactors',$produfactors_arr);
+            return $this -> db -> affected_rows();
         }
 
         public function produfactors_model_sel($dept_id){
