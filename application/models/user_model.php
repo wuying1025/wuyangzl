@@ -23,9 +23,8 @@ class User_model extends CI_Model{
         return $this -> db -> affected_rows();
     }
 
-    public function get_user($dept_id,$name,$pass){
+    public function get_user($name,$pass){
         return $this -> db -> get_where('w_user', array(
-                'w_dept_id' => $dept_id,
                 'w_user_name' => $name,
                 'w_pass' => $pass)
         ) -> row();

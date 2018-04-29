@@ -16,6 +16,9 @@
             $private_tel_num=$this->input->post('private_tel_num');
             $private_address=$this->input->post('private_address');
             $private_soil_name=$this->input->post('private_soil_name');
+            $private_soil_contract=$this->input->post('private_soil_contract');
+
+            //private_soil_contract
             $private_all=array(
                 'w_private_owner'=>$private_owner,
                 'w_private_soil_area'=>$private_soil_area,
@@ -23,7 +26,8 @@
                 'w_private_tel_num'=>$private_tel_num,
                 'w_private_address'=>$private_address,
                 'w_private_dept_id'=>$dept_id,
-                'w_private_soil_name'=>$private_soil_name
+                'w_private_soil_name'=>$private_soil_name,
+                'w_private_soil_contract'=>$private_soil_contract
 
             );
 
@@ -60,9 +64,16 @@
 
                 $name = $_FILES['file']['name'];
                 $name_tmp = $_FILES['file']['tmp_name'];
-                $pic_url =  $path . $name;
+
+                $arr = explode(".",$name);
+                $type = $arr[1];
+                $filename = $arr[0];
+
+                //获取文件类型
+                $pic_name = $filename.time()  . "." . $type;
+                $pic_url =  $path . $pic_name;
                 if (move_uploaded_file($name_tmp, $pic_url)) {//临时文件转移到目标文件夹
-                    echo 'success';
+                    echo $pic_url;
                 } else {
                     echo 'fail';
                 }

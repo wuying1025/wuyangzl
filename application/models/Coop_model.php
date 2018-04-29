@@ -29,6 +29,12 @@ class Coop_model extends CI_Model{
         $this->db->update('w_coop_all_msg', $coop_all_msg);
         return $this -> db -> affected_rows();
     }
+    public function get_total($dept_id){
+        $this->db->select('sum(w_coop_soil_area) num');
+        $this->db->from('w_coop_msg');
+        $this->db->where('w_coop_dept_id',$dept_id);
+        return $this->db->get()->row();
+    }
 
 
 
